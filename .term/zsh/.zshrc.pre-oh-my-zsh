@@ -1,0 +1,32 @@
+# zsh
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
+COMPLETION_WAITING_DOTS="true"
+HIST_STAMPS="mm/dd/yyyy"
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+  source $ZSH/oh-my-zsh.sh
+fi
+DEFAULT_USER=$(whoami)
+
+source ~/.config/zsh/general
+source ~/.config/zsh/completion
+source ~/.config/zsh/plugins
+source ~/.config/zsh/aliases
+source ~/.config/zsh/keybindings
+source ~/.config/zsh/env
+
+# fzf
+source ~/.config/fzf/fzf-config
+
+# iTerm2 Shell Integration
+export ITERM2_SQUELCH_MARK=1
+test -e "${ZDOTDIR}/iterm2_shell_integration.zsh" && source "${ZDOTDIR}/iterm2_shell_integration.zsh"
+
+# Wezterm Shell Integration
+[[ -n $WEZTERM_CONFIG_DIR ]] && test -e "${ZDOTDIR}/wezterm_shell_integration.sh" && source "${ZDOTDIR}/wezterm_shell_integration.sh"
+
+# zoxide
+source $HOME/.config/zoxide/zoxide-config
+eval "$(zoxide init zsh)"

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# General
+alias c="clear"
+alias ka="killall"
+alias du='du -sh * | sort -rh'
+
+# ls
+alias ls='logo-ls'
+alias ils='logo-ls'
+alias la='logo-ls -A'
+alias ll='logo-ls -al'
+
+# Download
+alias wget="wget --continue --progress=bar --timestamping"
+alias curl="curl --continue-at - --location --progress-bar --remote-name --remote-time"
+alias aria="aria2c --max-connection-per-server=5 --continue"
+alias yd="yt-dlp --paths ~/Downloads"
+alias yda="yt-dlp --extract-audio --audio-format best --paths ~/Downloads"
+
+# Use neovim for vim if present
+command -v nvim >/dev/null && alias vimdiff="nvim -d"
+
+# Dotfiles management
+alias dot="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+
+# Convert video to GIF (with 2K resolution) using ffmpeg
+# Usage: vtg input_name output_name, then output_name.gif will be generated
+alias vtg='function video_to_gif(){ ffmpeg -i $1 -pix_fmt rgb8 -r 10 -vf scale=2560:-1 $2.gif && gifsicle -O3 $2.gif -o $2.gif && osascript -e "display notification \"$2.gif successfully converted and saved\" with title \"VIDEO2GIF SUCCESS!\""};video_to_gif'
+
+# "ranger" is an autoload function defined at ../functions/ranger
+# When quitting ranger using Z, change the shell pwd to the last visited directory
+alias ra="ranger"
+
+alias cfg='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'

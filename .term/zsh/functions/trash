@@ -1,0 +1,25 @@
+# vim: filetype=zsh
+
+# SYNOPSIS: trash [target1 target2 ...]
+# DESCRIPTION: Move targets into the system trash bin. If no targets are given,
+# fzf will be open for us to select the targets, and then trash them.
+
+target=($@)
+if [[ $# == 0 ]]; then
+  target=($(gls -A -I .DS_Store -I .localized | fzf))
+fi
+
+if [[ -z $target ]]; then
+  echo "Failed! Please give files/dirs to trash."
+  return 1
+fi
+
+echo -n "Items to be trashed:\n$(echo $target | tr ' ' '\n')\n\nTrash? [y/N]"
+read ans
+if [[ $ans == "y" ]]; then
+  command trash -F $target && echo "Trash complete!"
+elif [[ $ans == "n" ]]; then
+  echo "Canceled!"
+else
+  echo "Failed! Use y to trash."
+fi

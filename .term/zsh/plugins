@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+
+# Using zimfw as the plugin manager
+
+if [[ ${ZIM_HOME}/init.zsh -ot ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+source ${ZIM_HOME}/init.zsh
+
+# The prefix for the alias from zim builtin git module
+#zstyle ':zim:git' aliases-prefix 'g'
+
+# Append `../` to your input for each `.` you type after an initial `..`
+zstyle ':zim:input' double-dot-expand yes
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# fzf-tab
+# Preview
+zstyle ':fzf-tab:*' fzf-flags '--preview-window=hidden,<9999(hidden)'
+zstyle ':fzf-tab:*' fzf-preview 'echo Preview is not available!'
+zstyle ':fzf-tab:*' fzf-pad 3
+
+source $ZSH/oh-my-zsh.sh
+
+# Puts the cursor in a new line for the Agnoster theme
+prompt_end() {
+  if [[ -n $CURRENT_BG ]]; then
+    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+  else
+    echo -n "\n%{%k%}"
+  fi
+  echo -n "\n>%{%f%}"
+  CURRENT_BG=''
+}

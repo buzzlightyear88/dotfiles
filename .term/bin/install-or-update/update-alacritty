@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+cd ~/repos/alacritty
+
+# Fetch
+echo -e "\nFetching...\n"
+git fetch
+
+if [[ -n $(git --no-pager log HEAD..origin/master) ]]; then
+
+  # Show all commits ahead
+  git --no-pager log HEAD..origin/master
+
+  echo -e "\n"
+  read -p "Press ENTER to continue to merge and build..."
+
+  # Merge
+  echo -e "\nMerging...\n"
+  git merge
+
+  # Build
+  echo -e "\nBuilding...\n"
+  make app
+  cp -R target/release/osx/Alacritty.app /Applications/
+
+  echo -e "\nAlacritty update finished.\n"
+
+else
+  echo "Alacritty is already update to date."
+fi

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+path=$HOME/.term/repos/fzf
+
+[[ -d $path ]] && rm -rf $path
+git clone --depth 1 https://github.com/junegunn/fzf.git $path
+$path/install

@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+
+# Remove duplicated commands in history
+setopt HIST_IGNORE_ALL_DUPS
+
+# Prompt for spelling correction of commands.
+# setopt CORRECT
+
+# Make right prompt aligned to the rightmost
+ZLE_RPROMPT_INDENT=0
+
+# My own defined autoload functions (under ~/.term/zsh/functions/)
+fpath+=${0:h}/functions
+autoload -Uz ${0:h}/functions/*(.:t)
+
+# Change open files limit on macOS
+ulimit -n 524288
+ulimit -u 2048
+
+# Color man pages
+function man() {
+  env LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;34m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[4;1;32m") \
+    man "$@"
+}
+
+#############################################################################
+# History changes
+# Default is 10,000, prefer 100,000
+HISTSIZE=100000
+SAVEHIST=100000
+
+# Write the history file in the ":start:elapsed;command" format.
+setopt EXTENDED_HISTORY
+# Write to the history file immediately, not when the shell exits.
+setopt INC_APPEND_HISTORY
+# Share history between all sessions.
+setopt SHARE_HISTORY
+# Expire duplicate entries first when trimming history.
+setopt HIST_EXPIRE_DUPS_FIRST
+# Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_DUPS
+# Delete old recorded entry if new entry is a duplicate.
+setopt HIST_IGNORE_ALL_DUPS
+# Do not display a line previously found.
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+# Don't write duplicate entries in the history file.
+setopt HIST_SAVE_NO_DUPS
+# Remove superfluous blanks before recording entry.
+setopt HIST_REDUCE_BLANKS
+# Don't execute immediately upon history expansion.
+setopt HIST_VERIFY
+# Beep when accessing nonexistent history.
+setopt HIST_BEEP

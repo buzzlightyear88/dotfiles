@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+export XDG_term_HOME=$HOME/.term
+export XDG_DATA_HOME=$HOME/.local/share
+
+export PAGER=less
+
+# Specify the path to golang libraries
+export GOPATH=$HOME/go
+
+# PATH
+export PATH=$HOME/Development/apache-maven-3.6.1/bin:$PATH
+export PATH=$HOME/.emacs.d/bin:$PATH  # Doom Emacs
+export PATH=$HOME/Library/Python/2.7/bin:$PATH  # pip, pip2, pip2.7
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH  # MacPorts
+export PATH=$HOME/.term/fzf/bin:$PATH # fzf scripts
+export PATH=$GOPATH/bin:$PATH   # Golong programs
+export PATH=$HOME/repos/diff-so-fancy:$PATH  # diff-so-fancy
+export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # Use the latest llvm instead of macOS builtin
+PATH=~/.local/bin:"$PATH"
+PATH="$PATH":~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
+
+# Use Neovim as "preferred editor"
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+
+# Use Neovim as man pager
+export MANPAGER="nvim +Man!"
+export MANWIDTH=999
+
+# Customize spelling correction prompt.
+export SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+# Remove / from WORDCHARS
+export WORDCHARS=${WORDCHARS//[\/]}
+
+# less
+export LESSOPEN="| highlight %s -O truecolor -s darkplus --force -l"
+export LESS="-R -M -i -j5"
+
+# Gtags
+export GTAGSLABEL='native-pygments'
+export GTAGSCONF=$(print ${~conf_path})
+
+# Ranger: avoid loading config twice (only loading the custom config under ~/.term/ranger/, not loading the default/global config)
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
+# CA certificate for SSL
+#export SSL_CERT_FILE=$HOME/.term/misc/cacert.pem
+
+# ls colors
+source $HOME/.term/zsh/lscolors.sh # GNU ls
+# BSD (vanilla ls in macOS)
+export CLICOLOR=1
+export LSCOLORS='ExfxcxdxbxGxDxabagacad'
+# Bat
+export BAT_THEME="arctic"
+
+#
+# User-defined
+#
+# Build --exclude parameters for fd (i.e., --exclude .git --exclude .Trash
+# --exclude ...)
+export FD_EXCLUDE="$(cat $HOME/.term/exclude | sed 's/^/--exclude /' | tr '\n' ' ')"
+# Build -g parameters for rg (i.e., -g !.git -g !.Trash -g ...)
+export RG_EXCLUDE="$(cat $HOME/.term/exclude | sed 's/^/-g !/' | tr '\n' ' ')"
+
+#
+# Configs below are taken from zimfw utility: https://github.com/zimfw/utility/blob/master/init.zsh
+#
+
+# Colors
+if (( terminfo[colors] >= 8 )); then
+  # grep colours
+  if (( ! ${+GREP_COLOR} )) export GREP_COLOR='37;45'               #BSD
+  if (( ! ${+GREP_COLORS} )) export GREP_COLORS="mt=${GREP_COLOR}"  #GNU
+
+  # less colours
+  if (( ${+commands[less]} )); then
+    if (( ! ${+LESS_TERMCAP_mb} )) export LESS_TERMCAP_mb=$'\E[1;31m'   # Begins blinking.
+    if (( ! ${+LESS_TERMCAP_md} )) export LESS_TERMCAP_md=$'\E[1;31m'   # Begins bold.
+    if (( ! ${+LESS_TERMCAP_me} )) export LESS_TERMCAP_me=$'\E[0m'      # Ends mode.
+    if (( ! ${+LESS_TERMCAP_se} )) export LESS_TERMCAP_se=$'\E[27m'     # Ends standout-mode.
+    if (( ! ${+LESS_TERMCAP_so} )) export LESS_TERMCAP_so=$'\E[7m'      # Begins standout-mode.
+    if (( ! ${+LESS_TERMCAP_ue} )) export LESS_TERMCAP_ue=$'\E[0m'      # Ends underline.
+    if (( ! ${+LESS_TERMCAP_us} )) export LESS_TERMCAP_us=$'\E[1;32m'   # Begins underline.
+  fi
+else
+  # See https://no-color.org
+  export NO_COLOR=1
+fi
+
+# Set machine to Linux or Mac
+UNAME_OUT="$(uname -s)"
+case "${UNAME_OUT=}" in
+    Linux*)     MACHINE_TYPE=Linux;;
+    Darwin*)    MACHINE_TYPE=Mac;;
+    CYGWIN*)    MACHINE_TYPE=Cygwin;;
+    MINGW*)     MACHINE_TYPE=MinGw;;
+    *)          MACHINE_TYPE="UNKNOWN:${unameOut}"
+esac
+export MACHINE_TYPE=$MACHINE_TYPE
