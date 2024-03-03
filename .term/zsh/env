@@ -16,6 +16,8 @@ export PATH=$HOME/.term/fzf/bin:$PATH # fzf scripts
 export PATH=$GOPATH/bin:$PATH   # Golong programs
 export PATH=$HOME/repos/diff-so-fancy:$PATH  # diff-so-fancy
 export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # Use the latest llvm instead of macOS builtin
+export PATH=$HOME/repos/diff-so-fancy:$PATH  # diff-so-fancy
+
 PATH=~/.local/bin:"$PATH"
 PATH="$PATH":~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"

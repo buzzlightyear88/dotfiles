@@ -32,3 +32,5 @@ For ubuntu:
 #### [fd](https://github.com/sharkdp/fd) Dir Scanner
 
 #### [rg](https://github.com/BurntSushi/ripgrep) File Scanner
+
+#### [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) Git Diff Tool
