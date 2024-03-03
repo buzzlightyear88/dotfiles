@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
- 
+
 # Terminal background is transparent or not
 export TRANSPARENT=false
 
