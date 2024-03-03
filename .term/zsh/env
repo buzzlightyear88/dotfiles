@@ -20,13 +20,9 @@ PATH=~/.local/bin:"$PATH"
 PATH="$PATH":~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# Use Neovim as "preferred editor"
-export EDITOR="nvim"
+# Use vim as "preferred editor"
+export EDITOR="vim"
 export VISUAL="$EDITOR"
-
-# Use Neovim as man pager
-export MANPAGER="nvim +Man!"
-export MANWIDTH=999
 
 # Customize spelling correction prompt.
 export SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
@@ -53,8 +49,9 @@ source $HOME/.term/zsh/lscolors.sh # GNU ls
 # BSD (vanilla ls in macOS)
 export CLICOLOR=1
 export LSCOLORS='ExfxcxdxbxGxDxabagacad'
+
 # Bat
-export BAT_THEME="arctic"
+#export BAT_THEME="arctic"
 
 #
 # User-defined
