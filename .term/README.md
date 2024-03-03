@@ -14,7 +14,7 @@ My dotfiles for `macOS` and `Linux`. Just cherry pick the piece of code you tota
 
 #### [zsh](https://github.com/ohmyzsh/ohmyzsh) Terminal
 
-#### [fzf](https://github.com/junegunn/fzf) Fuzzy Search [[config]](./.term/bin/install-or-update)
+#### [fzf](https://github.com/junegunn/fzf) Fuzzy Search [[config]](./bin/install-or-update)
 
 #### [bat](https://github.com/sharkdp/bat) Terminal Window Preview
 
