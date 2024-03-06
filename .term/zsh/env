@@ -5,18 +5,16 @@ export XDG_DATA_HOME=$HOME/.local/share
 export PAGER=less
 
 # Specify the path to golang libraries
-export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin
 
 # PATH
-export PATH=$HOME/Development/apache-maven-3.6.1/bin:$PATH
-export PATH=$HOME/.emacs.d/bin:$PATH  # Doom Emacs
-export PATH=$HOME/Library/Python/2.7/bin:$PATH  # pip, pip2, pip2.7
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH  # MacPorts
 export PATH=$HOME/.term/fzf/bin:$PATH # fzf scripts
-export PATH=$GOPATH/bin:$PATH   # Golong programs
 export PATH=$HOME/repos/diff-so-fancy:$PATH  # diff-so-fancy
-export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # Use the latest llvm instead of macOS builtin
-export PATH=$HOME/repos/diff-so-fancy:$PATH  # diff-so-fancy
+
+export FLYCTL_INSTALL="/home/goori/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+eval "$(thefuck --alias)"
 
 PATH=~/.local/bin:"$PATH"
 PATH="$PATH":~/.local/bin

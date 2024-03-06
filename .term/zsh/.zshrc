@@ -27,3 +27,20 @@ test -e "${ZDOTDIR}/iterm2_shell_integration.zsh" && source "${ZDOTDIR}/iterm2_s
 # zoxide
 source $HOME/.term/zoxide/zoxide-config
 eval "$(zoxide init zsh)"
+
+#Clean up PATH
+if [ -n "$PATH" ]; then
+  old_PATH=$PATH:
+  PATH=
+  while [ -n "$old_PATH" ]; do
+    x=${old_PATH%%:*} # the first remaining entry
+    case $PATH: in
+    *:"$x":*) ;;        # already there
+    *) PATH=$PATH:$x ;; # not there yet
+    esac
+    old_PATH=${old_PATH#*:}
+  done
+  PATH=${PATH#:}
+  export PATH
+  unset old_PATH x
+fi
